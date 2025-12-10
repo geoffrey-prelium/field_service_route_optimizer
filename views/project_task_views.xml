@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- List View Extension -->
+    <record id="view_task_tree2_inherited_route" model="ir.ui.view">
+        <field name="name">project.task.tree.inherited.route</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_tree2"/> 
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="route_id" optional="show"/>
+                <field name="visit_sequence" optional="show"/>
+                <field name="intervention_duration" widget="float_time" optional="show" sum="Total Duration"/>
+                <field name="travel_duration" widget="float_time" optional="hide" sum="Total Travel"/>
+                <field name="estimated_arrival" optional="show"/>
+            </xpath>
+            <xpath expr="//list" position="attributes">
+                <attribute name="default_order">visit_sequence</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

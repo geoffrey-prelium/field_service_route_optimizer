@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_add_route_tasks_form" model="ir.ui.view">
+        <field name="name">field.service.route.add.tasks.form</field>
+        <field name="model">field.service.route.add.tasks</field>
+        <field name="arch" type="xml">
+            <form string="Add Unassigned Tasks">
+                <group>
+                    <field name="task_ids" widget="many2many_checkboxes" nolabel="1"/>
+                </group>
+                <footer>
+                    <button name="action_add_tasks" string="Add Tasks" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_add_route_tasks" model="ir.actions.act_window">
+        <field name="name">Add Unassigned Tasks</field>
+        <field name="res_model">field.service.route.add.tasks</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

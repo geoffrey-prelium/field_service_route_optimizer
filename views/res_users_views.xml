@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_users_form_route_optimizer" model="ir.ui.view">
+        <field name="name">res.users.form.route.optimizer</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[@name='preferences']" position="inside">
+                <group string="Field Service Route">
+                    <field name="default_start_address_id" context="{'show_address': 1}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

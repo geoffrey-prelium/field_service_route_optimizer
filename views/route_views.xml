@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Route Form View -->
+    <record id="view_field_service_route_form" model="ir.ui.view">
+        <field name="name">field.service.route.form</field>
+        <field name="model">field.service.route</field>
+        <field name="arch" type="xml">
+            <form string="Route Sheet">
+                <header>
+                    <button name="action_optimize_route" string="Optimize Route" type="object" class="btn-primary"/>
+                    <button name="action_open_google_maps" string="Open in Google Maps" type="object" class="btn-secondary" icon="fa-map-marker"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Route Name (e.g. Tuesday Morning)"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="user_id"/>
+                            <field name="start_datetime"/>
+                        </group>
+                        <group>
+                            <field name="end_datetime"/>
+                            <field name="total_travel_duration" widget="float_time"/>
+                            <field name="return_travel_duration" widget="float_time" class="text-muted"/>
+                            <field name="total_intervention_duration" widget="float_time"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Tasks">
+                            <button name="%(field_service_route_optimizer.action_add_route_tasks)d" string="Add Unassigned Tasks" type="action" class="btn-secondary mb-2"/>
+                            <field name="task_ids" context="{'default_user_ids': [user_id]}">
+                                <list string="Tasks" editable="bottom">
+                                    <field name="visit_sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="partner_id"/>
+                                    <field name="partner_city" optional="show"/>
+                                    <field name="intervention_duration" widget="float_time" sum="Total"/>
+                                    <field name="travel_duration" widget="float_time" sum="Total"/>
+                                    <field name="estimated_arrival"/>
+                                    <field name="stage_id"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Route List View -->
+    <record id="view_field_service_route_tree" model="ir.ui.view">
+        <field name="name">field.service.route.tree</field>
+        <field name="model">field.service.route</field>
+        <field name="arch" type="xml">
+            <list string="Routes">
+                <field name="name"/>
+                <field name="user_id"/>
+                <field name="start_datetime"/>
+                <field name="end_datetime"/>
+                <field name="total_travel_duration" widget="float_time"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_field_service_route" model="ir.actions.act_window">
+        <field name="name">Routes</field>
+        <field name="res_model">field.service.route</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create a new Route Sheet
+          </p>
+        </field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_field_service_route"
+              name="Routes"
+              parent="industry_fsm.fsm_menu_root"
+              action="action_field_service_route"
+              sequence="15"/>
+
+</odoo>

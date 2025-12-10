@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_route_optimizer_wizard_form" model="ir.ui.view">
+        <field name="name">field.service.route.optimizer.wizard.form</field>
+        <field name="model">field.service.route.optimizer.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Optimize Route">
+                <group>
+                    <field name="start_datetime" widget="datetime"/>
+                    <field name="task_ids" widget="many2many_tags" readonly="1" options="{'no_open': True}"/>
+                </group>
+                <footer>
+                    <button name="action_optimize" string="Optimize" type="object" class="btn-primary" data-hotkey="q"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_route_optimizer_wizard" model="ir.actions.act_window">
+        <field name="name">Optimize Route</field>
+        <field name="res_model">field.service.route.optimizer.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="project.model_project_task"/>
+        <field name="binding_view_types">list</field>
+    </record>
+</odoo>
