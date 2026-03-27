@@ -6,7 +6,13 @@
         <field name="arch" type="xml">
             <form string="Add Unassigned Tasks">
                 <group>
-                    <field name="task_ids" widget="many2many_checkboxes" nolabel="1"/>
+                    <field name="task_ids" nolabel="1">
+                        <tree>
+                            <field name="name"/>
+                            <field name="partner_id"/>
+                            <field name="partner_city"/>
+                        </tree>
+                    </field>
                 </group>
                 <footer>
                     <button name="action_add_tasks" string="Add Tasks" type="object" class="btn-primary"/>
